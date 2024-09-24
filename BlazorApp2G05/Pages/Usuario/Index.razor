@@ -47,7 +47,20 @@ else
                     <td>@user.Login</td>
                     <td>@user.Rol.Nombre</td>
                     <td>@user.FechaRegistro</td>
-                    <td>@{var estado = (user.Estatus == 1 ? "Activo" : "InActivo");}</td>
+                    @{
+                            if (user.Estatus == 1) 
+                            {
+                                <td>
+                                    ACTIVO
+                                </td>
+                            }
+                            else 
+                                {
+                                    <td>
+                                        INACTIVO
+                                    </td>
+                                }
+                        }
                     <td><button class="btn btn-success" @onclick="(() => goModify(user.Id))">Modificar</button></td>
                     <td><button class="btn btn-info" @onclick="(() => goDetail(user.Id))">Detalle</button></td>
                     <td><button class="btn btn-danger" @onclick="(() => goDelete(user.Id))">Eliminar</button></td>

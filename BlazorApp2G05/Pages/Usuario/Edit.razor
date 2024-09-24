@@ -1,12 +1,13 @@
-﻿@page "/usuario/create"
+﻿@page "/usuario/edit/{pId:int}"
 @using SysSeguridadG05.EN;
 @using BlazorApp2G05.Data;
 @inject HttpClient Http;
 @inject NavigationManager NavManager
 
-<h3>Registrar Usuario</h3>
+<h3>Modificar Usuario</h3>
 
 <div class="row">
+    <input type="hidden" @bind-value="usuario.Id" />
     <div class="col-sm-12">
         <label class="form-label">Nombre</label>
         <input type="text" class="form-control" id="idNombre" @bind-value="usuario.Nombre" />
@@ -30,21 +31,16 @@
         <InputSelect id="roles" class="form-select" @bind-Value="usuario.IdRol">
             @foreach (var item in roles)
             {
-                <option value="@item.Id">@item.Nombre</option>
+                @if (item.Id == usuario.IdRol)
+                {
+                    <option value="@item.Id" selected>@item.Nombre</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Nombre</option>
+                }
             }
         </InputSelect>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <label class="form-label">Password</label>
-        <input type="password" class="form-control" id="idPassword" @bind-value="usuario.Password" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <label class="form-label">Confirmar Password</label>
-        <input type="password" class="form-control" id="idConfirmPass" @bind-value="usuario.ConfirmPassword_aux" />
     </div>
 </div>
 <div class="row">
@@ -53,14 +49,22 @@
         <InputSelect id="roles" class="form-select" @bind-Value="usuario.Estatus">
             @foreach (var item1 in estados)
             {
-                <option value="@item1.Id">@item1.Nombre</option>
+                @if (item1.Id == usuario.Estatus)
+                {
+                    <option value="@item1.Id" selected>@item1.Nombre</option>
+                }
+                else
+                {
+                    <option value="@item1.Id">@item1.Nombre</option>
+                }
+
             }
         </InputSelect>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-12">
-        <button class="btn btn-primary" @onclick="CreateUsuario">Guardar</button>
+        <button class="btn btn-primary" @onclick="ModificarUsuario">Guardar</button>
         <button class="btn btn-secondary" @onclick="Index">Regresar</button>
     </div>
 </div>
@@ -76,19 +80,27 @@
     List<Estado> estados = new List<Estado>();
     string error = "";
 
+    [Parameter]
+    public int pId { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            roles = await Http.GetFromJsonAsync<List<Rol>>("Rol");
+            if (pId != 0)
+            {
+                usuario = await Http.GetFromJsonAsync<Usuario>("Usuario/" + pId);
 
-            Estado estado = new Estado { Id = 0, Nombre = "--------SELECCIONAR--------" };
-            Estado estado1 = new Estado { Id = 1, Nombre = "ACTIVO" };
-            Estado estado2 = new Estado { Id = 2, Nombre = "INACTIVO" };
+                roles = await Http.GetFromJsonAsync<List<Rol>>("Rol");
 
-            estados.Add(estado);
-            estados.Add(estado1);
-            estados.Add(estado2);
+                Estado estado = new Estado { Id = 0, Nombre = "--------SELECCIONAR--------" };
+                Estado estado1 = new Estado { Id = 1, Nombre = "ACTIVO" };
+                Estado estado2 = new Estado { Id = 2, Nombre = "INACTIVO" };
+
+                estados.Add(estado);
+                estados.Add(estado1);
+                estados.Add(estado2);
+            }
 
         }
         catch (Exception ex)
@@ -97,11 +109,11 @@
         }
     }
 
-    public async Task CreateUsuario()
+    public async Task ModificarUsuario()
     {
         try
         {
-            var resultado = await Http.PostAsJsonAsync<Usuario>("Usuario", usuario);
+            var resultado = await Http.PutAsJsonAsync<Usuario>("Usuario/" + usuario.Id, usuario);
 
             if (Convert.ToInt32(resultado.StatusCode) == 200)
             {
@@ -123,3 +135,4 @@
         NavManager.NavigateTo("/usuario/index");
     }
 }
+

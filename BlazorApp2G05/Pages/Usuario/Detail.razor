@@ -1,0 +1,105 @@
+﻿@page "/usuario/detail/{pId:int}"
+@using SysSeguridadG05.EN;
+@using BlazorApp2G05.Data;
+@inject HttpClient Http;
+@inject NavigationManager NavManager
+
+<h3>Datalle Usuario</h3>
+
+<div class="row">
+    <input type="hidden" @bind-value="usuario.Id" />
+    <div class="col-sm-12">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="idNombre" readonly @bind-value="usuario.Nombre" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="idApellido" readonly @bind-value="usuario.Apellido" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Login</label>
+        <input type="text" class="form-control" id="idLogin" readonly @bind-value="usuario.Login" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Rol</label>
+        <input type="text" class="form-control" id="idRol" readonly @bind-value="rol.Nombre" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Estado</label>
+        <input type="text" class="form-control" id="idEstatus" readonly @bind-value="estado">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-success" @onclick="IrAModificar">Ir a Modificar</button>
+        <button class="btn btn-secondary" @onclick="Index">Regresar</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <span style="color:red; font-weight:bold">@error</span>
+    </div>
+</div>
+@code {
+    Usuario usuario = new Usuario();
+    string estado = "";
+    Rol rol = new Rol();
+
+    string error = "";
+
+    [Parameter]
+    public int pId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (pId != 0)
+            {
+                usuario = await Http.GetFromJsonAsync<Usuario>("Usuario/" + pId);
+                rol = await Http.GetFromJsonAsync<Rol>("Rol/" + usuario.IdRol);
+
+                if (usuario.Estatus == 1)
+                    estado = "ACTIVO";
+                else
+                    estado = "INACTIVO";
+
+            }
+            else
+            {
+                error = "Usuario seleccionado es invalido";    
+            }
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public void IrAModificar()
+    {
+        try
+        {
+            NavManager.NavigateTo("/usuario/edit/" + usuario.Id);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+
+    void Index()
+    {
+        NavManager.NavigateTo("/usuario/index");
+    }
+}
+
