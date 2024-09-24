@@ -1,0 +1,89 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = BlazorApp2G05
+build_property.RootNamespace = BlazorApp2G05
+build_property.ProjectDir = C:\Users\victo\source\repos\BlazorApp2G05\BlazorApp2G05\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\victo\source\repos\BlazorApp2G05\BlazorApp2G05
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Ejemplo/Sumar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWplbXBsb1xTdW1hci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Rol/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9sXENyZWF0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Rol/Delete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9sXERlbGV0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Rol/Detail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9sXERldGFpbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Rol/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9sXEVkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Rol/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9sXEluZGV4LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Usuario/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpb1xDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Usuario/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpb1xJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-35pt7w2nxs
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-izsljmhh7u
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/source/repos/BlazorApp2G05/BlazorApp2G05/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

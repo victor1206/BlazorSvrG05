@@ -1,0 +1,107 @@
+﻿@page "/usuario/index"
+@using SysSeguridadG05.EN;
+@using BlazorApp2G05.Data;
+@using System.Text.Json;
+@inject HttpClient http
+@inject NavigationManager NavManager;
+
+<PageTitle>Index</PageTitle>
+
+<button id="idNuevo" class="btn btn-primary" @onclick="newUsuario">Nuevo Usuario</button>
+<h3>Buscar</h3>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="idBusNombre" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-primary" @onclick="BuscarRol">Buscar</button>
+    </div>
+</div>
+@if (usuarios == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Login</th>
+                <th>Rol</th>
+                <th>Fecha Rergistro</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in usuarios)
+            {
+                <tr>
+                    <td>@user.Nombre</td>
+                    <td>@user.Apellido</td>
+                    <td>@user.Login</td>
+                    <td>@user.Rol.Nombre</td>
+                    <td>@user.FechaRegistro</td>
+                    <td>@{var estado = (user.Estatus == 1 ? "Activo" : "InActivo");}</td>
+                    <td><button class="btn btn-success" @onclick="(() => goModify(user.Id))">Modificar</button></td>
+                    <td><button class="btn btn-info" @onclick="(() => goDetail(user.Id))">Detalle</button></td>
+                    <td><button class="btn btn-danger" @onclick="(() => goDelete(user.Id))">Eliminar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Usuario[]? usuarios;
+
+    //RolDTO rolbus = new RolDTO();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            usuarios = await http.GetFromJsonAsync<Usuario[]>("Usuario");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    private async void BuscarRol()
+    {
+        /*var result = await http.PostAsJsonAsync("Rol/Buscar", rolbus);
+        var content = await result.Content.ReadAsStringAsync();
+        roles = JsonSerializer.Deserialize<Rol[]>(content,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        StateHasChanged();*/
+    }
+
+    void newUsuario()
+    {
+        NavManager.NavigateTo("/usuario/create");
+    }
+
+    void goModify(int pId)
+    {
+        NavManager.NavigateTo("/usuario/edit/" + pId);
+
+    }
+
+    void goDetail(int pId)
+    {
+        NavManager.NavigateTo("/usuario/detail/" + pId);
+    }
+
+    void goDelete(int pId)
+    {
+        NavManager.NavigateTo("/usuario/delete/" + pId);
+    }
+}
+

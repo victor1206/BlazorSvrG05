@@ -1,0 +1,96 @@
+﻿@page "/rol/index"
+@using SysSeguridadG05.EN;
+@using BlazorApp2G05.Data;
+@using System.Text.Json;
+@inject HttpClient http
+@inject NavigationManager NavManager;
+
+<PageTitle>Index</PageTitle>
+
+<button id="idNuevo" class="btn btn-primary" @onclick="newRol">Nuevo Rol</button>
+<h3>Buscar</h3>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="idBusNombre" @bind-value="rolbus.Nombre" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-primary" @onclick="BuscarRol">Buscar</button>
+    </div>
+</div>
+@if (roles == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var rol in roles)
+            {
+                <tr>
+                    <td>@rol.Nombre</td>
+                    <td><button class="btn btn-success" @onclick="(() => goModify(rol.Id))">Modificar</button></td>
+                    <td><button class="btn btn-info" @onclick="(() => goDetail(rol.Id))">Detalle</button></td>
+                    <td><button class="btn btn-danger" @onclick="(() => goDelete(rol.Id))">Eliminar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Rol[]? roles;
+
+    RolDTO rolbus = new RolDTO();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            roles = await http.GetFromJsonAsync<Rol[]>("Rol");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    private async void BuscarRol()
+    {
+        var result = await http.PostAsJsonAsync("Rol/Buscar", rolbus);
+        var content = await result.Content.ReadAsStringAsync();
+        roles = JsonSerializer.Deserialize<Rol[]>(content,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        StateHasChanged();
+    }
+
+    void newRol()
+    {
+        NavManager.NavigateTo("/rol/create");
+    }
+
+    void goModify(int pId)
+    {
+        NavManager.NavigateTo("/rol/edit/" + pId);
+
+    }
+
+    void goDetail(int pId)
+    {
+        NavManager.NavigateTo("/rol/detail/" + pId);
+    }
+
+    void goDelete(int pId)
+    {
+        NavManager.NavigateTo("/rol/delete/" + pId);
+    }
+}

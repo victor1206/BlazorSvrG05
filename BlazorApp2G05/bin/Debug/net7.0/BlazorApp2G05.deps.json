@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "BlazorApp2G05/1.0.0": {
+        "dependencies": {
+          "SysSeguridadG05.EN": "1.0.0.0"
+        },
+        "runtime": {
+          "BlazorApp2G05.dll": {}
+        }
+      },
+      "SysSeguridadG05.EN/1.0.0.0": {
+        "runtime": {
+          "SysSeguridadG05.EN.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BlazorApp2G05/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SysSeguridadG05.EN/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

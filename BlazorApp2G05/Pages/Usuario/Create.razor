@@ -1,0 +1,125 @@
+﻿@page "/usuario/create"
+@using SysSeguridadG05.EN;
+@using BlazorApp2G05.Data;
+@inject HttpClient Http;
+@inject NavigationManager NavManager
+
+<h3>Registrar Usuario</h3>
+
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="idNombre" @bind-value="usuario.Nombre" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="idApellido" @bind-value="usuario.Apellido" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Login</label>
+        <input type="text" class="form-control" id="idLogin" @bind-value="usuario.Login" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Rol</label>
+        <InputSelect id="roles" class="form-select" @bind-Value="usuario.IdRol">
+            @foreach (var item in roles)
+            {
+                <option value="@item.Id">@item.Nombre</option>
+            }
+        </InputSelect>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="idPassword" @bind-value="usuario.Password" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Confirmar Password</label>
+        <input type="password" class="form-control" id="idConfirmPass" @bind-value="usuario.ConfirmPassword_aux" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <label class="form-label">Estado</label>
+        <InputSelect id="roles" class="form-select" @bind-Value="usuario.Estatus">
+            @foreach (var item1 in estados)
+            {
+                <option value="@item1.Id">@item1.Nombre</option>
+            }
+        </InputSelect>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-primary" @onclick="CreateUsuario">Guardar</button>
+        <button class="btn btn-secondary" @onclick="Index">Regresar</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <span style="color:red; font-weight:bold">@error</span>
+    </div>
+</div>
+@code {
+    Usuario? usuario = new Usuario();
+
+    List<Rol> roles = new List<Rol>();
+    List<Estado> estados = new List<Estado>();
+    string error = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            roles = await Http.GetFromJsonAsync<List<Rol>>("Rol");
+
+            Estado estado = new Estado { Id = 0, Nombre = "--------SELECCIONAR--------" };
+            Estado estado1 = new Estado { Id = 1, Nombre = "ACTIVO" };
+            Estado estado2 = new Estado { Id = 1, Nombre = "INACTIVO" };
+
+            estados.Add(estado);
+            estados.Add(estado1);
+            estados.Add(estado2);
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public async Task CreateUsuario()
+    {
+        try
+        {
+            var resultado = await Http.PostAsJsonAsync<Usuario>("Usuario", usuario);
+
+            if (Convert.ToInt32(resultado.StatusCode) == 200)
+            {
+                Index();
+            }
+            else
+            {
+                error = "Error al Ingresar el Usuario";
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message.ToString());
+        }
+    }
+
+    void Index()
+    {
+        NavManager.NavigateTo("/usuario/index");
+    }
+}
